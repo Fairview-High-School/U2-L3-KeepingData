@@ -15,10 +15,19 @@ def loadFile(filename):
         wordList.append(word)
     file.close()
 
-#here is an example predicate block.  You may want to make more to use in your filter below
+#here is an example boolean function.  You may want to make more to use in your filter below
 def isInteger(number):
   return number == int(number)
-  
+
+# Here is another more generic boolean function for working with words  
+# You can replace the return condition with whatever you need.
+def keepWordCondition(x):
+    return len(x) == 6 and x[0] == "r" and x[2] == "d"
+
+# Here is another more generic boolean function for working with numbers 
+# You can replace the return condition with whatever you need.
+def keepNumberCondition(x):
+    return isInteger(x) and x > 0 
     
 #MAIN SCRIPT
 #setup()
@@ -33,17 +42,19 @@ print (str(len(wordList)) + " total words in list.")
 
 #EXAMPLE OF FILTERING WORD LIST
 print("FILTERING WORD LIST")
-result = filter(lambda x: len(x) == 6 and x[0] == "r" and x[2] == "d" , wordList)  # 6 letter word and 1st letter is "r" and 3d letter is "d"
+result = filter(lambda x: keepWordCondition(x), wordList)  # 6 letter word and 1st letter is "r" and 3d letter is "d"
+result = list(result) #convert result of filter to a list.
 #to filter the list differently, change the condition.  (The condition above is len(x) == 6 and x[0] == "r" and x[2] == "d"
 print(result)
-print (str(len(result)) + " results in filtered word list.")
+print (len(result) , " results in filtered word list.")
 
 print("")
 print("")
 
 #EXAMPLE OF FILTERING NUMBER LIST
 print("FILTERING NUMBER LIST")
-result2 = filter(lambda x: isInteger(x) and x > 0, numbersList) # integers that are greater than 0
+result2 = filter(lambda x: keepNumberCondition(x), numbersList) # integers that are greater than 0
+result2 = list(result2) #convert result of filter to a list.
 print(result2)
 print (str(len(result2)) + " results in filtered number list.")
 
