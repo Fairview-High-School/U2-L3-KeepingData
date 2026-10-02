@@ -15,53 +15,48 @@ def loadFile(filename):
         wordList.append(word)
     file.close()
 
-#here is an example boolean function.  You may want to make more to use in your filter below
-def isInteger(number):
-  return number == int(number)
 
-# Here is another more generic boolean function for working with words  
-# You can replace the return condition with whatever you need.
-def keepWordCondition(x):
-    return len(x) == 6 and x[0] == "r" and x[2] == "d"
-
-# Here is another more generic boolean function for working with numbers 
-# You can replace the return condition with whatever you need.
-def keepNumberCondition(x):
-    return isInteger(x) and x > 0 
-    
-#MAIN SCRIPT
-#setup()
-loadFile("word-puzzle-list.txt")
-print (str(len(wordList)) + " total words in list.")
+#BOOLEAN FUNCTIONS
 #len(wordList) returns the length of the list
 #list[0] returns the first letter in list
 #list[2] returns the third letter in list
 #and: means both left and right conditions must be true for the entire expression to be true
 #or: means only one or the other (or both) conditions must be true for the entire expression to be true
+#example boolean function.  You may want to make more to use in your filter below
 
+def isInteger(number):
+  return number == int(number)
 
-#EXAMPLE OF FILTERING WORD LIST
+# boolean function for working with words  
+# You can replace the return condition with whatever you need.
+# example:  return len(x) == 6 and x[0] == "r" and x[2] == "d"
+def keepWordCondition(x):
+    return len(x) == 6 and x[0] == "r" and x[2] == "d"
+
+# boolean function for working with numbers 
+# You can replace the return condition with whatever you need.
+# example:  return isInteger(x) and x > 0 
+def keepNumberCondition(x):
+    return isInteger(x) and x > 0 
+
+#MAIN SCRIPT
+
+loadFile("word-puzzle-list.txt")
+print (len(wordList) , " total words in list.")
+
+#FILTERING WORD LIST
 print("FILTERING WORD LIST")
-result = filter(lambda x: keepWordCondition(x), wordList)  # 6 letter word and 1st letter is "r" and 3d letter is "d"
+result = filter(lambda x: keepWordCondition(x), wordList) 
 result = list(result) #convert result of filter to a list.
-#to filter the list differently, change the condition.  (The condition above is len(x) == 6 and x[0] == "r" and x[2] == "d"
+#to filter the list differently, change the condition in keepWordCondition(x) above.
 print(result)
 print (len(result) , " results in filtered word list.")
 
 print("")
-print("")
 
-#EXAMPLE OF FILTERING NUMBER LIST
+#FILTERING NUMBER LIST
 print("FILTERING NUMBER LIST")
-result2 = filter(lambda x: keepNumberCondition(x), numbersList) # integers that are greater than 0
+result2 = filter(lambda x: keepNumberCondition(x), numbersList)
 result2 = list(result2) #convert result of filter to a list.
 print(result2)
 print (str(len(result2)) + " results in filtered number list.")
-
-
-
-#Here were the initial examples in case you modified them:
-
-#result = filter(lambda x: len(x) == 6 and x[0] == "r" and x[2] == "d" , wordList)  # 6 letter word and 1st letter is "r" and 3d letter is "d"
-
-#result2 = filter(lambda x: isInteger(x) and x > 0, numbersList) # integers that are greater than 0
